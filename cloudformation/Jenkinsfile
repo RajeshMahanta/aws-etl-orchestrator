@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('create Stack') {
+            steps {
+            sh "aws cloudformation create-stack --stack-name glue --template-body file://glue-resources.yaml --capabilities CAPABILITY_IAM --region us-east-1"
+              }
+             }
+        stage('wait stack') {
+            steps {
+            sh "aws cloudformation wait stack-create-complete --stack-name glue --region us-east-1"
+            }
+            }
+            }
+            }
